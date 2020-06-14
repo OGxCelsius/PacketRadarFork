@@ -1,0 +1,79 @@
+if (entry->value >= 100000) // Super high value
+    {
+        draw = true;
+        *r = 255; // The red value of the beam
+        *g = 0; // green
+        *b = 0; // blue
+        *draw_beam = true; // whether or not to draw the beam
+        *beam_height = 200.0f; // How tall into the sky the beam is
+        *draw_text = !entry->unknown; // Draw the text as long as its id is in our database
+    }
+    else if (entry->name == "Lab. Red keycard" || 
+        entry->name == "Keytool" || 
+        entry->name == "Lab. Blue keycard" || 
+        entry->name == "Lab. Green keycard" || 
+        entry->name == "Lab. Violet keycard" ||
+        entry->name == "Military COFDM wireless Signal Transmitter" || 
+        entry->name == "Graphics card" || 
+        entry->name == "Paracord" || 
+        entry->name == "TerraGroup Labs access keycard" || 
+        entry->name == "Golden Star Balm (10/10)") 
+    {
+        draw = true;
+        *r = 255; // The red value of the beam
+        *g = 0; // green
+        *b = 255; // blue
+        *draw_beam = true; // whether or not to draw the beam
+        *beam_height = 200.0f; // How tall into the sky the beam is
+        *draw_text = !entry->unknown; // Draw the text as long as its id is in our database
+    } //  
+    else if (entry->name == "6-STEN-140-M military battery" ||
+             entry->name == "LEDX Skin Transilluminator" ||
+             entry->name == "5e2af4a786f7746d3f3c3400" || // Ripstop
+             entry->name == "5e2af47786f7746d404f3aaa" || // Fleece
+             entry->name == "UHF RFID Reader" ||
+             entry->name == "5e54f79686f7744022011103" || // Plague Mask
+             entry->name == "5e54f6af86f7742199090bf3" || // Lupo's coffee beans
+             entry->name == "OFZ 30x160mm shell" ) // Quest Items   
+    {
+        draw = true;
+        *r = 0;
+        *b = 0;
+        *g = 255;
+        *draw_beam = true;
+        *beam_height = 200.0f;
+        *draw_text = !entry->unknown;
+    }
+    // Else if it is superrare just draw a black box
+    // Note that a ton of stupid items are superrare like IFAKs
+    else if (entry->value >= 30000) 
+    {
+        draw = true;
+        *r = 0;
+        *g = 0;
+        *b = 255;
+        *draw_beam = true;
+        *beam_height = 20.0f;
+        *draw_text = !entry->unknown;
+    }
+    // Else don't draw it at all
+    else 
+    {
+        draw = false;
+        *r = 0;
+        *g = 0;
+        *b = 0;
+        *draw_beam = false;
+        *draw_text = false;
+    }
+    // highlight overrides all
+    if (entry->highlighted)
+    {
+        draw = true;
+        *draw_beam = true;
+        *beam_height = 50.0f;
+        *draw_text = true;
+        *r = 153;
+        *g = 101;
+        *b = 21;
+    }
